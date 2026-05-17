@@ -3,7 +3,6 @@ import {API} from '../config/api.js'
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/Context.jsx";
 import AddItemBar from "./AddItemBar.jsx";
-import Logo from "../assets/logo.jpg";
 import Button from "./Button.jsx";
 
 function AvailableMeals() {

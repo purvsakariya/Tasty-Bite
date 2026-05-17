@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Logo from "../assets/logo.jpg";
 import Button from './Button';
 import { UserContext } from '../store/UserProgressCtx';
 import { useNavigate } from 'react-router-dom';
