@@ -1,13 +1,33 @@
 # Food Order Project
 
-A full-stack food ordering application.
+-Tasty Bite is a full-stack food ordering web application built using the MERN stack. Users can browse food items, add products to cart, create orders, and securely authenticate using JWT authentication.
+-This project was created to improve my full-stack development skills using React, Express.js, MongoDB, and REST APIs.
+
+## 🚀 Features
+
+### User Features
+- User Signup & Login Authentication
+- JWT-based Authentication
+- Browse Food Items
+- Add to Cart Functionality
+- Order Placement System
+- Responsive User Interface
+- Secure Password Hashing with Bcrypt
+
+### Admin/Backend Features
+- REST API with Express.js
+- MongoDB Database Integration
+- Image Upload using Cloudinary
+- Cookie-based Authentication
+- Middleware-based Route Protection
+- API Logging using Morgan
 
 ## Technologies Used
 
 ### Frontend
 - **React** with **Vite**
 - **React Router** for routing
-- **TailwindCSS** / **PostCSS** for styling (configured via postcss/autoprefixer)
+- **useReducer** / **ContextApi** for State Management
 
 ### Backend
 - **Node.js** with **Express**
@@ -27,36 +47,6 @@ A full-stack food ordering application.
 ### Prerequisites
 - Node.js installed on your machine
 - MongoDB instance (local or Atlas)
-
-### Setup Instructions
-
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
-   cd Food-Order-Project
-   ```
-
-2. **Backend Setup**
-   ```bash
-   cd backend
-   npm install
-   ```
-   - Create a `.env` file in the `backend` directory with your environment variables (e.g., `PORT`, `MONGODB_URI`, `JWT_SECRET`, Cloudinary credentials).
-   - Start the backend server:
-   ```bash
-   npm run dev
-   ```
-
-3. **Frontend Setup**
-   ```bash
-   cd ../frontend
-   npm install
-   ```
-   - Create a `.env` file in the `frontend` directory if required for your Vite app (e.g., `VITE_API_URL`).
-   - Start the frontend development server:
-   ```bash
-   npm run dev
-   ```
 
 ## License
 ISC
