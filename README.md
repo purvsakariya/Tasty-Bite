@@ -1,6 +1,26 @@
 # Food Order Project
 
-A full-stack food ordering application.
+-Tasty Bite is a full-stack food ordering web application built using the MERN stack. Users can browse food items, add products to cart, create orders, and securely authenticate using JWT authentication.
+-This project was created to improve my full-stack development skills using React, Express.js, MongoDB, and REST APIs.
+
+## 🚀 Features
+
+### User Features
+- User Signup & Login Authentication
+- JWT-based Authentication
+- Browse Food Items
+- Add to Cart Functionality
+- Order Placement System
+- Responsive User Interface
+- Secure Password Hashing with Bcrypt
+
+### Admin/Backend Features
+- REST API with Express.js
+- MongoDB Database Integration
+- Image Upload using Cloudinary
+- Cookie-based Authentication
+- Middleware-based Route Protection
+- API Logging using Morgan
 
 ## Technologies Used
 
