@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { use } from "react";
 import { Context } from "../store/Context";
 import { UserContext } from "../store/UserProgressCtx";
 import Button from "./Button";

@@ -78,7 +78,9 @@ export function ContextProvider({ children }) {
   useEffect(() => {
     fetch(API.MEALS)
       .then((res) => res.json())
-      .then((data) => setAvailableMeals(data.availableMeals))
+      .then((data) => {
+        setAvailableMeals(data.meals);
+      })
       .catch((err) => {
         console.error("Fetch failed:", err.message);
         setAvailableMeals([]);

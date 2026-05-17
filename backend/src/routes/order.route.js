@@ -3,8 +3,8 @@ import { availableMeals, order, orderHistory } from "../controller/order.control
 
 const router = Router()
 
-router.route('/availableMeals').get(availableMeals)
 router.route('/order').post(order)
 router.route('/orderHistory').post(orderHistory)
+router.route('/availableMeals').get(availableMeals)
 
 export default router;

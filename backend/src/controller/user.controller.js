@@ -2,8 +2,7 @@ import { User } from "../models/user.model.js";
 
 const options = {
     httpOnly: true,
-    secure: true,
-    sameSite: "none"
+    secure: true
 }
 
 const generateAccessToken = async (userId, res) => {

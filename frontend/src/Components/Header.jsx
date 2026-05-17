@@ -1,9 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {API} from '../config/api.js'
-import Logo from "../assets/logo.jpg";
 import Cart from './Cart'
-import { UserContext } from "../store/UserProgressCtx";
 import { Context } from "../store/Context";
 // import Button from "./Button";
 
@@ -46,7 +44,7 @@ function Header() {
   return (
     <header id="main-header">
       <div className="title">
-        <img src={Logo} alt="Website Logo" />
+        <img src="https://res.cloudinary.com/dfypghcgt/image/upload/v1779007561/logo_wzqpze.jpg" alt="Website Logo" />
         <h1>ReactFood</h1>
       </div>
       {user && <button className="btn" onClick={ShowModel}>{user?.username[0].toUpperCase()}</button>}

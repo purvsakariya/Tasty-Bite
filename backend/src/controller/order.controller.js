@@ -3,9 +3,9 @@ import { AvailableMeals } from "../models/meal.model.js"
 
 export const availableMeals = async (req, res) => {
     try {
-        const availableMeals = await AvailableMeals.find({})
+        const meals = await AvailableMeals.find({})
 
-        return res.status(200).json({ message: 'Meals fetched successfully', availableMeals });
+        return res.status(200).json({ message: 'Meals fetched successfully', meals });
     } catch (error) {
         return res.status(500).json({ message: 'Failed to fetch meals', error: error.message });
     }

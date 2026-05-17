@@ -3,11 +3,9 @@ import { createContext, useState } from "react";
 export const UserContext = createContext({
     progress:"",
     showCart:() => {},
-    hideCart:()=>{},
+    hideModel:()=>{},
     showCheckout:()=>{},
-    hideCheckout:()=>{},
-    showPlacedOrder:()=>{},
-    hidePlacedOrder:()=>{}
+    showPlacedOrder:()=>{}
 })
 
 export function UserContextProvider({children}){
