@@ -9,10 +9,6 @@ function OrderHistory() {
     const navigate = useNavigate();
     const { user } = useContext(Context)
 
-    if (!user) {
-        navigate("/")
-    }
-
     const [orders, setOrders] = useState([])
 
     useEffect(() => {

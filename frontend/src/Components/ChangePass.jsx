@@ -10,9 +10,6 @@ function ChangePass() {
     const { user } = useContext(Context)
     const navigate = useNavigate();
 
-    if (!user) {
-        navigate('/')
-    }
     const [error, setError] = useState("")
     const [success, setSuccess] = useState("")
 
@@ -63,7 +60,7 @@ function ChangePass() {
                 <Input
                     label="newPassword"
                     id="newPassword"
-                    type="text"
+                    type="password"
                     name="newPassword"
                     placeholder="Enter Your newPassword"
                     required
@@ -71,7 +68,7 @@ function ChangePass() {
                 <Input
                     label="conform Password"
                     id="confPassword"
-                    type="text"
+                    type="password"
                     name="confPassword"
                     placeholder="Enter Your newPassword"
                     required

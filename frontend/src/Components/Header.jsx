@@ -9,7 +9,7 @@ function Header() {
   const navigate = useNavigate();
   const [showModel, setShowModel] = useState(false)
   const { user, setUser } = useContext(Context);
-  const token = localStorage.getItem('accessToken') || user?.accessToken;
+  const token = user?.accessToken;
 
   function ShowModel() {
     setShowModel(prev => !prev);
@@ -29,8 +29,8 @@ function Header() {
     if (response.ok) {
       setShowModel(false)
       setUser(null);
-      localStorage.removeItem('accessToken');
-      navigate("/");
+      // localStorage.removeItem('accessToken');
+      navigate("/login");
     } else {
       console.error(res?.message || 'Logout failed:');
     }
@@ -53,7 +53,7 @@ function Header() {
           <button className="btn" onClick={ShowModel}>{user?.username[0].toUpperCase()}</button>
           <div>
             <p>{user?.username}</p>
-            <p>@{user?.email}</p>
+            <p>{user?.email}</p>
           </div>
         </div>
         <div className="userDetailsBtn">

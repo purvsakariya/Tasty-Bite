@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import Input from "./Input";
 import {API} from '../config/api.js'
 import Button from "./Button";
-import { UserContext } from "../store/UserProgressCtx";
 import { Context } from "../store/Context";
 import { useNavigate } from "react-router-dom";
 
@@ -11,9 +10,6 @@ function Checkout() {
 
   const { items, user } = useContext(Context);
   
-  if (!user) {
-        navigate("/")
-    }
   const cartTotalPrice = items.reduce(
     (totalPrice, item) => totalPrice + item.quantity * item.price,
     0,

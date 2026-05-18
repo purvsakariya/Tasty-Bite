@@ -1,23 +1,23 @@
 import React, { useContext, useState } from 'react'
-import Input from './Input';
-import Button from './Button';
+import Input from './Input.jsx';
+import Button from './Button.jsx';
 import {API} from '../config/api.js'
 import { useNavigate } from 'react-router-dom';
-import { Context } from '../store/Context';
+import { Context } from '../store/Context.jsx';
 
 function SingIn() {
 
   const navigate = useNavigate();
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
-    const { setUser } = useContext(Context)
+  const { setUser } = useContext(Context)
   async function handleSubmit(e) {
     e.preventDefault();
 
     const fd = new FormData(e.target);
     const { username, email, password } = Object.fromEntries(fd.entries())
 
-    const response = await fetch(API.SINGIN, {
+    const response = await fetch(API.SIGNIN, {
       method: "POST",
       body: JSON.stringify({ username, email, password }),
       headers: {
@@ -30,7 +30,7 @@ function SingIn() {
     if (!response.ok) {
       setError(res.message);
     } else {
-      localStorage.setItem('accessToken', res.accessToken);
+      // localStorage.setItem('accessToken', res.accessToken);
       setUser({ ...res.user, accessToken: res.accessToken });
       setSuccess(res.message)
       setTimeout(()=>{
@@ -68,7 +68,7 @@ function SingIn() {
         <Input
           label="password"
           id="password"
-          type="text"
+          type="password"
           placeholder="Enter Your Password"
           name="password"
           required
@@ -77,7 +77,7 @@ function SingIn() {
         {success && <p className='success'>{success}</p>}
         <p className='modal-actions'>
           <button type='button' className="text-button" onClick={handleLogin}>Log In</button>
-          <Button type="submit">Sing In</Button>
+          <Button type="submit">Sign In</Button>
         </p>
       </form>
     </div>

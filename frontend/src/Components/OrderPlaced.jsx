@@ -1,17 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Button from './Button';
-import { UserContext } from '../store/UserProgressCtx';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../store/Context';
 
 function OrderPlaced() {
   const navigate = useNavigate();
 
-  const {user,items} = useContext(Context)
-
-  if (!user) {
-        navigate("/")
-    }
+  const {items} = useContext(Context)
 
   const [time, setTime] = useState(10)
 

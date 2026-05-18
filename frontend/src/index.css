@@ -38,16 +38,15 @@ body {
 #main-header .btn {
   font-size: 2rem;
   font-family: 'Lato', sans-serif;
-  width: 50px;
+  width: 44px;
   background-color: transparent;
   color: #29251B;
   background-color: #ffab04;
   font-weight: bolder;
-  border-radius: 100%;
+  border-radius: 50%;
   outline: none;
   border: none;
   cursor: pointer;
-  animation: fade-slide-up 0.3s ease-out forwards;
 }
 
 #main-header .btn:hover {
@@ -57,12 +56,12 @@ body {
 #main-header .userDetails .btn {
   font-size: 2rem;
   font-family: 'Lato', sans-serif;
-  width: 44px;
+  width: 50px;
   background-color: transparent;
   color: #ffab04;
   background-color: #29251B;
   font-weight: bolder;
-  border-radius: 50%;
+  border-radius: 100%;
   outline: none;
   border: none;
   cursor: pointer;
@@ -90,20 +89,35 @@ body {
 
 .userDetails{
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  left: 72%;
-  top:7%;
-  background-color: #ffab04;
-  color: #29251B;
-  border-radius: 1rem;
-  padding: 1rem 0.5rem;
+    flex-direction: column;
+    gap: 2rem;
+    left: auto;
+    top: 5%;
+    background-color: #ffab04;
+    color: #29251B;
+    border-radius: 1rem;
+    margin-right: 15px;
+    animation: mealQuantity 0.3s ease-out forwards;
 }
 
-.userDetails .userPersonalDetails{
+.userPersonalDetails{
   display: flex;
   gap: 1rem;
+  height: 3.5rem;
 }
+
+.userPersonalDetails div{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 5px;
+}
+
+.userPersonalDetails p{
+  padding: 0;
+  margin: 0;
+}
+
 .userDetailsBtn{
   display: flex;
   flex-direction: column;

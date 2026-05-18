@@ -9,11 +9,7 @@ function AvailableMeals() {
 
   const navigate = useNavigate();
   
-  const { availableMeals, addMeals, items, user, removeMeals } = useContext(Context);
-  
-    if(!user){
-      navigate("/")
-    }
+  const { availableMeals, addMeals, items, removeMeals } = useContext(Context);
 
   return <>
     <ul className="meals">

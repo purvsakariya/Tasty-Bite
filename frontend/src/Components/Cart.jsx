@@ -1,16 +1,13 @@
 import React, { useContext } from "react";
 import { Context } from "../store/Context";
-import { UserContext } from "../store/UserProgressCtx";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const navigate = useNavigate();
 
-  const { user,items, addMeals, removeMeals } = useContext(Context);
-  if (!user) {
-        navigate("/")
-    }
+  const { items, addMeals, removeMeals } = useContext(Context);
+  
   const cartTotalPrice = items.reduce(
     (totalPrice, item) => totalPrice + item.quantity * item.price,
     0,

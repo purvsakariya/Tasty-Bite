@@ -2,78 +2,93 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ContextProvider } from "./store/Context.jsx";
 import { UserContextProvider } from "./store/UserProgressCtx.jsx";
 import { lazy, Suspense } from "react";
+import { ProtectedRoute, PublicRoute } from './Components/ProtectedRoute.jsx'
+
+// Import All Components Using Lazy Loading.
 const AvailableMeals = lazy(() => import('./Components/AvailableMeals'))
 const Cart = lazy(() => import("./Components/Cart.jsx"));
 const Checkout = lazy(() => import("./Components/Checkout.jsx"));
 const Header = lazy(() => import("./Components/Header"));
 const OrderPlaced = lazy(() => import("./Components/OrderPlaced.jsx"));
 const LogIn = lazy(() => import("./Components/LogIn.jsx"));
-const SingIn = lazy(() => import("./Components/SingIn.jsx"));
-const Layout = lazy(() => import("./Components/Layout.jsx"));
+const SignIn = lazy(() => import("./Components/SignIn.jsx"));
+import Layout from './Components/Layout.jsx'
 const OrderHistory = lazy(() => import("./Components/OrderHistory.jsx"));
 const ChangePass = lazy(() => import("./Components/ChangePass.jsx"));
-
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
     children: [
+
+      //Public Routes
       {
-        index: true, element: (
+        index: true,
+        element: (<PublicRoute>
           <Suspense fallback={<p>Loading.....</p>}>
-            <SingIn />
+            <SignIn />
           </Suspense>
-        )
+        </PublicRoute>)
+
       },
       {
-        path: "/login", element: (
+        path: "/login",
+        element: (<PublicRoute>
           <Suspense fallback={<p>Loading.....</p>}>
             <LogIn />
           </Suspense>
-        )
+        </PublicRoute>)
       },
+
+      // authorization User Only
       {
-        path: "/meals", element: (
+        path: "/meals",
+        element: (<ProtectedRoute>
           <Suspense fallback={<p>Loading.....</p>}>
             <AvailableMeals />
           </Suspense>
-        )
+        </ProtectedRoute>)
       },
       {
-        path: "/cart", element: (
+        path: "/cart",
+        element: (<ProtectedRoute>
           <Suspense fallback={<p>Loading.....</p>}>
             <Cart />
           </Suspense>
-        )
+        </ProtectedRoute>)
       },
       {
-        path: "/checkout", element: (
+        path: "/checkout",
+        element: (<ProtectedRoute>
           <Suspense fallback={<p>Loading.....</p>}>
             <Checkout />
           </Suspense>
-        )
+        </ProtectedRoute>)
       },
       {
-        path: "/orderplaced", element: (
+        path: "/orderplaced",
+        element: (<ProtectedRoute>
           <Suspense fallback={<p>Loading.....</p>}>
             <OrderPlaced />
           </Suspense>
-        )
+        </ProtectedRoute>)
       },
       {
-        path: "/orderHistory", element: (
+        path: "/orderHistory",
+        element: (<ProtectedRoute>
           <Suspense fallback={<p>Loading.....</p>}>
             <OrderHistory />
           </Suspense>
-        )
+        </ProtectedRoute>)
       },
       {
-        path: "/changePass", element: (
+        path: "/changePass",
+        element: (<ProtectedRoute>
           <Suspense fallback={<p>Loading.....</p>}>
             <ChangePass />
           </Suspense>
-        )
+        </ProtectedRoute>)
       },
     ]
   },

@@ -32,7 +32,7 @@ function Login() {
             setError(res.message);
         } else {
             const token = res.accessToken || res.user?.accessToken;
-            localStorage.setItem('accessToken', token);
+            // localStorage.setItem('accessToken', token);
             setUser({ ...res.user, accessToken: token });
             setSuccess(res.message)
             setTimeout(() => {
@@ -62,7 +62,7 @@ function Login() {
                 <Input
                     label="password"
                     id="password"
-                    type="text"
+                    type="password"
                     placeholder="Enter Your Password"
                     name="password"
                     required
@@ -70,7 +70,7 @@ function Login() {
                 {error && <p className='error'>{error}</p>}
                 {success && <p className='success'>{success}</p>}
                 <p className='modal-actions'>
-                    <button type="button" className="text-button" onClick={handleSingin}>Sing In</button>
+                    <button type="button" className="text-button" onClick={handleSingin}>Sign In</button>
                     <Button type="submit">Log In</Button>
                 </p>
             </form>
