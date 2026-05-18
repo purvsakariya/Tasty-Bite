@@ -47,6 +47,7 @@ body {
   outline: none;
   border: none;
   cursor: pointer;
+  animation: fade-slide-up 0.3s ease-out forwards;
 }
 
 #main-header .btn:hover {
@@ -56,12 +57,12 @@ body {
 #main-header .userDetails .btn {
   font-size: 2rem;
   font-family: 'Lato', sans-serif;
-  width: 50px;
+  width: 44px;
   background-color: transparent;
   color: #ffab04;
   background-color: #29251B;
   font-weight: bolder;
-  border-radius: 100%;
+  border-radius: 50%;
   outline: none;
   border: none;
   cursor: pointer;
@@ -144,6 +145,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, minmax(10rem, 1fr));
   gap: 1rem;
+  animation: fade-slide-up 0.3s ease-out forwards;
 }
 
 .orderHistory-item{

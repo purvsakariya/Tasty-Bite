@@ -6,7 +6,7 @@ export const API = {
   REGISTER:`${BASE_URL}/api/v1/users/register`,
   LOGIN:`${BASE_URL}/api/v1/users/login`,
   LOGOUT:`${BASE_URL}/api/v1/users/logout`,
-  SINGIN:`${BASE_URL}/api/v1/users/singin`,
+  SINGIN:`${BASE_URL}/api/v1/users/register`,
   CHANGE_PASS:`${BASE_URL}/api/v1/users/changePass`,
 
   // Meals
