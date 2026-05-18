@@ -462,6 +462,7 @@ h1 {
   background-color: #b9f9b8;
   color: #1f6d0b;
   border-radius: 6px;
+  animation: mealQuantity 0.3s ease-out forwards;
 }
 
 .error h2 {
