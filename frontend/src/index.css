@@ -452,6 +452,7 @@ h1 {
   background-color: #f9b8b8;
   color: #6d0b0b;
   border-radius: 6px;
+  animation: mealQuantity 0.3s ease-out forwards;
 }
 
 .success {
