@@ -20,7 +20,7 @@ function Cart() {
         {items.length === 0 && <h2>Add Some Meals Which You Like To eat!</h2>}
         <ul>
           {items.map((meal) => {
-            const totalPrice = meal.quantity * meal.price;
+            const totalPrice = Math.round(meal.quantity * meal.price).toFixed(2);
             return (
               <li key={meal.id} className="cart-item">
                 <p>
@@ -34,7 +34,7 @@ function Cart() {
               </li>
             );
           })}
-          {items.length !== 0 && <p className="cart-total">${cartTotalPrice}</p>}
+          {items.length !== 0 && <p className="cart-total">${Math.round(cartTotalPrice).toFixed(2)}</p>}
           <p className="modal-actions">
             <button className="text-button" onClick={() => navigate("/meals")}>
               Close

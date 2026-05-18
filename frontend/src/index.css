@@ -87,6 +87,10 @@ body {
   background-color: #414040;
 }
 
+#main-header .userDetailsBtn .text-button:hover{
+  background-color: #414040;
+}
+
 .userDetails{
   display: flex;
     flex-direction: column;

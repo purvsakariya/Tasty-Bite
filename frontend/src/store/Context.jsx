@@ -7,6 +7,7 @@ export const Context = createContext({
   user: null,
   addMeals: (selectedMeal) => {},
   removeMeals: (id) => {},
+  clearCart:() => {},
 });
 
 function CartReducer(state, action) {
@@ -51,6 +52,10 @@ function CartReducer(state, action) {
     return { ...state, items: updatedItems };
   }
 
+  if (action.type === "CLEAR_CART") {
+    return { ...state, items: [] };
+  }
+
   return state;
 }
 
@@ -74,6 +79,13 @@ export function ContextProvider({ children }) {
     availableMeals[index].quantity -= 1;
   }
 
+  function clearCart() {
+    dispatchCartAction({ type: "CLEAR_CART" });
+    availableMeals.map(meal => {
+      meal.quantity = 0;
+    })
+    
+  }
 
   useEffect(() => {
     fetch(API.MEALS)
@@ -94,6 +106,7 @@ export function ContextProvider({ children }) {
     setUser,
     addMeals,
     removeMeals,
+    clearCart,
   };
 
   return <Context.Provider value={cartContextValue}>{children}</Context.Provider>;

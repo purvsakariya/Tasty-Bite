@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function Checkout() {
   const navigate = useNavigate();
 
-  const { items, user } = useContext(Context);
+  let { items, user , clearCart } = useContext(Context);
   
   const cartTotalPrice = items.reduce(
     (totalPrice, item) => totalPrice + item.quantity * item.price,
@@ -40,15 +40,16 @@ function Checkout() {
       })
 
       const data = await res.json()
-      console.log(data)
+      // console.log(data)
       if (!res.ok) {
         throw new Error(data?.message || 'Failed To Create Order')
       }
 
+      clearCart();
       navigate('/orderplaced')
 
     } catch (error) {
-      console.error('Order submission error:', error.message)
+      // console.error('Order submission error:', error.message)
       throw error
     }
   }
@@ -57,7 +58,7 @@ function Checkout() {
     <div className="cart">
       <div className="modal">
         <h2>Checkout</h2>
-        <p>Total Amount: ${cartTotalPrice}</p>
+        <p>Total Amount: ${Math.round(cartTotalPrice).toFixed(2)}</p>
         <form className="control" onSubmit={handleSubmit}>
           <Input
             label="Full Name"
