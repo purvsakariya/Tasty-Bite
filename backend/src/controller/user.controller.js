@@ -24,13 +24,13 @@ export const registerUser = async (req, res) => {
         const { username, email, password } = req.body
 
         if (!username || !email || !password) {
-            return res.status(400).json({ message: 'All Felids Are Required' })
+            return res.status(400).json({ message: 'All Felids Are Required!' })
         }
 
         const userExisted = await User.findOne({ email: email.toLowerCase() });
 
         if (userExisted) {
-            return res.status(409).json({ message: 'User Was Already Existed' })
+            return res.status(409).json({ message: 'User Was Already Existed!' })
         }
 
         const user = await User.create({
@@ -52,6 +52,12 @@ export const registerUser = async (req, res) => {
             accessToken
         })
     } catch (error) {
+        const field = Object.keys(error.keyPattern)[0]; // e.g. "username"
+        if (error.code === 11000) {
+            return res.status(409).json({
+                message: `${field} already exists. Please choose another.`
+            });
+        }
         return res.status(500).json({ message: 'Something Went Wrong While Creating User', error: error.message })
     }
 }
@@ -119,31 +125,31 @@ export const logoutUser = async (req, res) => {
     }
 }
 
-export const changePassword = async (req,res) => {
-   try {
-     const {oldPassword,newPassword,confPassword,email} = req?.body;
- 
-     if(!oldPassword || !newPassword || !confPassword){
-         return res.status(400).json( {message:'Password Are Not Define!!!'} )
-     }
-     
-     if(newPassword !== confPassword){
-         return res.status(400).json( {message:'newPassword and conform Password is not matched!!!'} )
-     }
- 
-     const user = await User.findOne({email});
- 
-     const passMatched = await user.comparePass(oldPassword)
- 
-     if(!passMatched){
-         return res.status(400).json( {message:'Your Password Not Matched '} )
-     }
- 
-     user.password = newPassword;
-     user.save({validateBeforeSave:false})
- 
-     return res.status(200).json( {message:'Password is Changed SuccessFully...'} )  
-   } catch (error) {
-    return res.status(500).json( {message:'Something Went Wrong While Changing Password!'} )
-   }
+export const changePassword = async (req, res) => {
+    try {
+        const { oldPassword, newPassword, confPassword, email } = req?.body;
+
+        if (!oldPassword || !newPassword || !confPassword) {
+            return res.status(400).json({ message: 'Password Are Not Define!!!' })
+        }
+
+        if (newPassword !== confPassword) {
+            return res.status(400).json({ message: 'newPassword and conform Password is not matched!!!' })
+        }
+
+        const user = await User.findOne({ email });
+
+        const passMatched = await user.comparePass(oldPassword)
+
+        if (!passMatched) {
+            return res.status(400).json({ message: 'Your Password Not Matched ' })
+        }
+
+        user.password = newPassword;
+        user.save({ validateBeforeSave: false })
+
+        return res.status(200).json({ message: 'Password is Changed SuccessFully...' })
+    } catch (error) {
+        return res.status(500).json({ message: 'Something Went Wrong While Changing Password!' })
+    }
 }
