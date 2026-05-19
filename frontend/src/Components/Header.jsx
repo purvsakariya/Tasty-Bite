@@ -29,7 +29,6 @@ function Header() {
     if (response.ok) {
       setShowModel(false)
       setUser(null);
-      // localStorage.removeItem('accessToken');
       navigate("/login");
     } else {
       console.error(res?.message || 'Logout failed:');
@@ -78,6 +77,11 @@ function Header() {
           </button>
           <button
             className="text-button"
+            onClick={ShowModel}>Close
+          </button>
+          <button
+          style={{backgroundColor:"#6d0b0b"}}
+            className="text-button" 
             onClick={handleLogout}>Log Out
           </button>
         </div>

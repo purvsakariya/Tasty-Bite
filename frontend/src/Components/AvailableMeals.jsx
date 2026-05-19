@@ -19,18 +19,18 @@ function AvailableMeals() {
 
   return <>
     <div className="searchSection">
-      <input id="search" type="text" ref={searchRef} />
+      <input id="search" type="text" placeholder="Enter Meal Name To Search Them..." ref={searchRef} />
       {!search ?
         <img
           onClick={() => setSearch(searchRef.current.value)}
           className="searchLogo"
-          src={searchLogo}
+          src="https://res.cloudinary.com/dfypghcgt/image/upload/v1779184874/search_j1mzhc.svg"
           alt="Search Logo" />
         :
         <img
           onClick={() => { setSearch(""); searchRef.current.value = "" }}
           className="searchLogo"
-          src={closeLogo}
+          src="https://res.cloudinary.com/dfypghcgt/image/upload/v1779184839/close_sgfb9e.svg"
           alt="Search Logo" />
       }
     </div>
