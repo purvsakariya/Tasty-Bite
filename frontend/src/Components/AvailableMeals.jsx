@@ -1,19 +1,41 @@
-import React, { useContext, useEffect, useState } from "react";
-import {API} from '../config/api.js'
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { API } from '../config/api.js'
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/Context.jsx";
 import AddItemBar from "./AddItemBar.jsx";
 import Button from "./Button.jsx";
+import searchLogo from '../../public/svg/search.svg'
+import closeLogo from '../../public/svg/close.svg'
 
 function AvailableMeals() {
 
   const navigate = useNavigate();
-  
+  const searchRef = useRef("");
+  const [search, setSearch] = useState("");
+
   const { availableMeals, addMeals, items, removeMeals } = useContext(Context);
 
+  const searchedItems = availableMeals.filter(meal => meal?.name.toLowerCase().includes(search?.toLowerCase()))
+
   return <>
+    <div className="searchSection">
+      <input id="search" type="text" ref={searchRef} />
+      {!search ?
+        <img
+          onClick={() => setSearch(searchRef.current.value)}
+          className="searchLogo"
+          src={searchLogo}
+          alt="Search Logo" />
+        :
+        <img
+          onClick={() => {setSearch(""); searchRef.current.value = ""}}
+          className="searchLogo"
+          src={closeLogo}
+          alt="Search Logo" />
+      }
+    </div>
     <ul className="meals">
-      {Array.isArray(availableMeals) && availableMeals.map(meal => {
+      {Array.isArray(searchedItems) && searchedItems.map(meal => {
         return (
           <li key={meal.id} className="meal-item">
             <img src={meal.image} alt={meal.name} />

@@ -205,15 +205,70 @@ h1 {
   text-transform: uppercase;
 }
 
+.searchSection{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#search{
+  background-color: #212121;
+  color: #d9e2f1;
+  border: none;
+  outline: none;
+  padding: 0.6rem;
+  width: 40%;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.searchLogo{
+  background-color: #ffc404;
+  padding: 5px 10px;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  cursor: pointer;
+}
+
+.searchLogo:hover{
+  background-color: #fecb66;
+}
+
 .meals {
   width: 90%;
-  max-width: 70rem;
+  /* max-width: 70rem; */
   list-style: none;
   margin: 2rem auto;
   padding: 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(3, minmax(10rem, 1fr));
   gap: 1rem;
+}
+
+@media (min-width: 1400px) {
+  .meals {
+    grid-template-columns: repeat(4, minmax(10rem, 1fr));
+  }
+}
+
+@media (max-width: 1000px) {
+  .meals {
+    grid-template-columns: repeat(2, minmax(10rem, 1fr));
+  }
+
+  #search{
+    width: 60%;
+  }
+}
+
+@media (max-width: 650px) {
+  .meals {
+    grid-template-columns: repeat(1, minmax(10rem, 1fr));
+  }
+
+  #search{
+    width: 70%;
+  }
 }
 
 .meal-item {
