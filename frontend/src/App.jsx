@@ -13,6 +13,7 @@ const OrderPlaced = lazy(() => import("./Components/OrderPlaced.jsx"));
 const LogIn = lazy(() => import("./Components/LogIn.jsx"));
 const SignIn = lazy(() => import("./Components/SignIn.jsx"));
 import Layout from './Components/Layout.jsx'
+import NotFound from './Components/NotFound.jsx'
 const OrderHistory = lazy(() => import("./Components/OrderHistory.jsx"));
 const ChangePass = lazy(() => import("./Components/ChangePass.jsx"));
 
@@ -38,6 +39,12 @@ const router = createBrowserRouter([
           <Suspense fallback={<p>Loading.....</p>}>
             <LogIn />
           </Suspense>
+        </PublicRoute>)
+      },
+      {
+        path: "*",
+        element: (<PublicRoute>
+          <NotFound />
         </PublicRoute>)
       },
 
