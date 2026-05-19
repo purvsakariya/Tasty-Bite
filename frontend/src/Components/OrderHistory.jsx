@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../store/Context'
-import {API} from '../config/api.js'
+import { API } from '../config/api.js'
 import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 
@@ -37,15 +37,18 @@ function OrderHistory() {
         <>
             {orders?.length > 0 ? <ul className='ordersHistory'>
                 {orders.map((order, index) => <ul key={order._id}>
-                    <h1>Order Number: {index + 1}</h1>
+                    <div className='orderHistoryNum'>
+                        <h1>Order Number: {index + 1}</h1>
+                        <h1>Meals: {orders[index]?.items.length}</h1>
+                    </div>
                     <div className='orderHistory2'>
                         {order?.items.map(item => <li key={item._id} className="orderHistory-item">
                             <img src={item.image} alt={item.name} />
                             <div>
                                 <h3>{item.name}</h3>
                                 <div className='orderHistory-item-price'>
-                                <p className="meal-item-price">Price: {item.price}</p>
-                                {item.quantity !== 1 && <p className="meal-item-price">TotalPrice: {item.price * item.quantity}</p>}
+                                    <p className="meal-item-price">Price: {item.price}</p>
+                                    {item.quantity !== 1 && <p className="meal-item-price">TotalPrice: {item.price * item.quantity}</p>}
                                 </div>
                                 <p className="meal-item-description">{item.description}</p>
                                 <p>Quantity: {item.quantity}</p>
@@ -57,8 +60,8 @@ function OrderHistory() {
             </ul>
                 :
                 <div className='ordersHistoryError'>
-                <h2>Please Order Something...</h2>
-                <Button onClick={() => navigate('/meals')}>Home</Button>
+                    <h2>Please Order Something...</h2>
+                    <Button onClick={() => navigate('/meals')}>Home</Button>
                 </div>
             }
         </>

@@ -28,7 +28,7 @@ function AvailableMeals() {
           alt="Search Logo" />
         :
         <img
-          onClick={() => {setSearch(""); searchRef.current.value = ""}}
+          onClick={() => { setSearch(""); searchRef.current.value = "" }}
           className="searchLogo"
           src={closeLogo}
           alt="Search Logo" />
@@ -52,7 +52,9 @@ function AvailableMeals() {
       })}
       {!Array.isArray(availableMeals) && <li className="meal-item">No meals available.</li>}
     </ul>
-    {items.length !== 0 && <AddItemBar />}
+    <div className="addItemCartDiv">
+      {items.length !== 0 && <AddItemBar />}
+    </div>
   </>
 }
 
