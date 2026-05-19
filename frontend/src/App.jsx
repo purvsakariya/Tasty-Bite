@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: (<PublicRoute>
-          <Suspense fallback={<p>Loading.....</p>}>
+          <Suspense fallback={<p className="loading">Loading.....</p>}>
             <SignIn />
           </Suspense>
         </PublicRoute>)
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: (<PublicRoute>
-          <Suspense fallback={<p>Loading.....</p>}>
+          <Suspense fallback={<p className="loading">Loading.....</p>}>
             <LogIn />
           </Suspense>
         </PublicRoute>)
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       {
         path: "/meals",
         element: (<ProtectedRoute>
-          <Suspense fallback={<p>Loading.....</p>}>
+          <Suspense fallback={<p className="loading">Loading.....</p>}>
             <AvailableMeals />
           </Suspense>
         </ProtectedRoute>)
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: (<ProtectedRoute>
-          <Suspense fallback={<p>Loading.....</p>}>
+          <Suspense fallback={<p className="loading">Loading.....</p>}>
             <Cart />
           </Suspense>
         </ProtectedRoute>)
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
       {
         path: "/checkout",
         element: (<ProtectedRoute>
-          <Suspense fallback={<p>Loading.....</p>}>
+          <Suspense fallback={<p className="loading">Loading.....</p>}>
             <Checkout />
           </Suspense>
         </ProtectedRoute>)
@@ -76,7 +76,7 @@ const router = createBrowserRouter([
       {
         path: "/orderplaced",
         element: (<ProtectedRoute>
-          <Suspense fallback={<p>Loading.....</p>}>
+          <Suspense fallback={<p className="loading">Loading.....</p>}>
             <OrderPlaced />
           </Suspense>
         </ProtectedRoute>)
@@ -84,7 +84,7 @@ const router = createBrowserRouter([
       {
         path: "/orderHistory",
         element: (<ProtectedRoute>
-          <Suspense fallback={<p>Loading.....</p>}>
+          <Suspense fallback={<p className="loading">Loading.....</p>}>
             <OrderHistory />
           </Suspense>
         </ProtectedRoute>)
@@ -92,7 +92,7 @@ const router = createBrowserRouter([
       {
         path: "/changePass",
         element: (<ProtectedRoute>
-          <Suspense fallback={<p>Loading.....</p>}>
+          <Suspense fallback={<p className="loading">Loading.....</p>}>
             <ChangePass />
           </Suspense>
         </ProtectedRoute>)

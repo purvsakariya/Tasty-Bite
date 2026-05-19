@@ -686,3 +686,12 @@ h1 {
   justify-content: flex-end;
   gap: 1rem;
 }
+
+.loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  font-weight: bolder;
+  color: #ffc404;
+}
