@@ -68,9 +68,11 @@ export function ContextProvider({ children }) {
   });
 
   function addMeals(item) {
-    dispatchCartAction({ type: "ADD_ITEM", item });
-    const index = availableMeals.findIndex(meal => meal.id === item.id)
-    availableMeals[index].quantity += 1;
+    if(item.quantity < 15){
+      dispatchCartAction({ type: "ADD_ITEM", item });
+      const index = availableMeals.findIndex(meal => meal.id === item.id)
+      availableMeals[index].quantity += 1;
+    }
   }
 
   function removeMeals(id) {

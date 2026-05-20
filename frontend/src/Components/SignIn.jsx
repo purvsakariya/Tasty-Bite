@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Input from './Input.jsx';
 import Button from './Button.jsx';
-import {API} from '../config/api.js'
+import { API } from '../config/api.js'
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../store/Context.jsx';
 
@@ -30,15 +30,15 @@ function SingIn() {
     if (!response.ok) {
       setError(res.message);
     } else {
-      // localStorage.setItem('accessToken', res.accessToken);
-      setUser({ ...res.user, accessToken: res.accessToken });
+      const token = res.accessToken
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(res.user));
+      setUser(res.user);
       setSuccess(res.message)
-      setTimeout(()=>{
-        navigate("/meals")
-      },2000)
+      navigate("/meals")
     }
 
-    
+
   }
 
   function handleLogin() {

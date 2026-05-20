@@ -6,7 +6,7 @@ import { Context } from "../store/Context";
 export function ProtectedRoute({ children }) {
     const { user } = useContext(Context);
 
-    if (!user?.accessToken) {
+    if (!user) {
         return <Navigate to="/" replace />;
     }
 
@@ -17,7 +17,7 @@ export function ProtectedRoute({ children }) {
 export function PublicRoute({ children }) {
     const { user } = useContext(Context);
 
-    if (user?.accessToken) {
+    if (user) {
         return <Navigate to="/meals" replace />;
     }
 
