@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../store/Context.jsx";
 import AddItemBar from "./AddItemBar.jsx";
 import Button from "./Button.jsx";
-import searchLogo from '../../public/svg/search.svg'
-import closeLogo from '../../public/svg/close.svg'
 
 function AvailableMeals() {
 

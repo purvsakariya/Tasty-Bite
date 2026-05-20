@@ -5,9 +5,9 @@ export const Context = createContext({
   items: [],
   availableMeals: null,
   user: null,
-  addMeals: (selectedMeal) => {},
-  removeMeals: (id) => {},
-  clearCart:() => {},
+  addMeals: (selectedMeal) => { },
+  removeMeals: (id) => { },
+  clearCart: () => { },
 });
 
 function CartReducer(state, action) {
@@ -84,10 +84,23 @@ export function ContextProvider({ children }) {
     availableMeals.map(meal => {
       meal.quantity = 0;
     })
-    
+
   }
 
   useEffect(() => {
+
+    const token = localStorage.getItem('token')
+    const userStr = localStorage.getItem('user')
+
+    if (token && userStr) {
+      try {
+        const userObj = JSON.parse(userStr);
+        setUser(userObj);
+      } catch (error) {
+        console.error("Failed TO get token and user while reload page!")
+      }
+    }
+
     fetch(API.MEALS)
       .then((res) => res.json())
       .then((data) => {

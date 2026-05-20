@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import {API} from '../config/api.js'
+import { API } from '../config/api.js'
 import Input from './Input';
 import Button from './Button';
 import { useNavigate } from 'react-router-dom';
@@ -18,27 +18,33 @@ function Login() {
         const fd = new FormData(e.target);
         const { email, password } = Object.fromEntries(fd.entries())
 
-        const response = await fetch(API.LOGIN, {
-            method: "POST",
-            body: JSON.stringify({ email, password }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
+        try {
+            const response = await fetch(API.LOGIN, {
+                method: "POST",
+                body: JSON.stringify({ email, password }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
 
-        const res = await response.json()
+            const res = await response.json()
 
-        if (!response.ok) {
-            setError(res.message);
-        } else {
-            const token = res.accessToken || res.user?.accessToken;
-            // localStorage.setItem('accessToken', token);
-            setUser({ ...res.user, accessToken: token });
-            setSuccess(res.message)
-            setTimeout(() => {
+            if (!response.ok) {
+                setError(res.message);
+            }else{
+                console.log("login")
+                const token = res.accessToken;
+                localStorage.setItem('token', token);
+                localStorage.setItem('user', JSON.stringify(res.user));
+                setUser(res.user);
+                setSuccess(res.message)
                 navigate("/meals")
-            }, 2000)
+            }
+        } catch (error) {
+            throw new Error(error?.message || "Failed To Do Login!")
         }
+
+
     }
 
     function handleSingin() {
