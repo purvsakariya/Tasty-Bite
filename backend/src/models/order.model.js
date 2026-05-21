@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
 
 const itemsSchema = new Schema({
-    id: {
+    _id: {
         type: String,
         required: true,
     },

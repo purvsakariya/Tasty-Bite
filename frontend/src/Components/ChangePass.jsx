@@ -15,27 +15,38 @@ function ChangePass() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setError("");
+        setSuccess("");
+
+        if (!user?.email) {
+            setError("User session not found. Please log in again.");
+            return;
+        }
 
         const fd = new FormData(e.target);
         const { oldPassword, newPassword, confPassword } = Object.fromEntries(fd.entries())
 
-        const response = await fetch(API.CHANGE_PASS, {
-            method: "POST",
-            body: JSON.stringify({ oldPassword, newPassword, confPassword, email: user.email }),
-            headers: {
-                "Content-Type": "application/json"
+        try {
+            const response = await fetch(API.CHANGE_PASS, {
+                method: "POST",
+                body: JSON.stringify({ oldPassword, newPassword, confPassword, email: user.email }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+            const res = await response.json()
+
+            if (!response.ok) {
+                setError(res.message);
+            } else {
+                setSuccess(res.message);
+                setTimeout(() => {
+                    navigate("/meals")
+                }, 2000)
             }
-        })
-
-        const res = await response.json()
-
-        if (!response.ok) {
-            setError(res.message);
-        } else {
-            setSuccess(res.message);
-            setTimeout(() => {
-                navigate("/meals")
-            }, 2000)
+        } catch (err) {
+            setError(err.message || "Failed to change password. Please try again.");
         }
     }
 

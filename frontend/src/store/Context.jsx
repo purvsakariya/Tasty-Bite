@@ -6,14 +6,14 @@ export const Context = createContext({
   availableMeals: null,
   user: null,
   addMeals: (selectedMeal) => { },
-  removeMeals: (id) => { },
+  removeMeals: (_id) => { },
   clearCart: () => { },
 });
 
 function CartReducer(state, action) {
   if (action.type === "ADD_ITEM") {
     const exitingItemIndex = state.items.findIndex(
-      (item) => item.id === action.item.id,
+      (item) => item._id === action.item._id,
     );
 
     const updatedItems = [...state.items];
@@ -34,7 +34,7 @@ function CartReducer(state, action) {
 
   if (action.type === "REMOVE_ITEM") {
     const exitingItemIndex = state.items.findIndex(
-      (item) => item.id === action.id,
+      (item) => item._id === action._id,
     );
     const exitingItem = state.items[exitingItemIndex];
     const updatedItems = [...state.items];
@@ -68,25 +68,30 @@ export function ContextProvider({ children }) {
   });
 
   function addMeals(item) {
-    if(item.quantity < 15){
+    if (item.quantity < 15) {
       dispatchCartAction({ type: "ADD_ITEM", item });
-      const index = availableMeals.findIndex(meal => meal.id === item.id)
-      availableMeals[index].quantity += 1;
+      setAvailableMeals(prev =>
+        prev.map(meal =>
+          meal._id === item._id ? { ...meal, quantity: meal.quantity + 1 } : meal
+        )
+      );
     }
   }
 
-  function removeMeals(id) {
-    dispatchCartAction({ type: "REMOVE_ITEM", id });
-    const index = availableMeals.findIndex(meal => meal.id === id)
-    availableMeals[index].quantity -= 1;
+  function removeMeals(_id) {
+    dispatchCartAction({ type: "REMOVE_ITEM", _id });
+    setAvailableMeals(prev =>
+      prev.map(meal =>
+        meal._id === _id ? { ...meal, quantity: meal.quantity - 1 } : meal
+      )
+    );
   }
 
   function clearCart() {
     dispatchCartAction({ type: "CLEAR_CART" });
-    availableMeals.map(meal => {
-      meal.quantity = 0;
-    })
-
+    setAvailableMeals(prev =>
+      prev.map(meal => ({ ...meal, quantity: 0 }))
+    );
   }
 
   useEffect(() => {
@@ -106,7 +111,7 @@ export function ContextProvider({ children }) {
     fetch(API.MEALS)
       .then((res) => res.json())
       .then((data) => {
-        setAvailableMeals(data.meals);
+        setAvailableMeals(data.meals.map(meal => ({ ...meal, quantity: 0 })));
       })
       .catch((err) => {
         console.error("Fetch failed:", err.message);

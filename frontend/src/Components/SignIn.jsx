@@ -17,25 +17,29 @@ function SingIn() {
     const fd = new FormData(e.target);
     const { username, email, password } = Object.fromEntries(fd.entries())
 
-    const response = await fetch(API.SIGNIN, {
-      method: "POST",
-      body: JSON.stringify({ username, email, password }),
-      headers: {
-        "Content-Type": "application/json"
+    try {
+      const response = await fetch(API.SIGNIN, {
+        method: "POST",
+        body: JSON.stringify({ username, email, password }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+
+      const res = await response.json()
+
+      if (!response.ok) {
+        setError(res.message);
+      } else {
+        const token = res.accessToken
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(res.user));
+        setUser(res.user);
+        setSuccess(res.message)
+        navigate("/meals")
       }
-    })
-
-    const res = await response.json()
-
-    if (!response.ok) {
-      setError(res.message);
-    } else {
-      const token = res.accessToken
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(res.user));
-      setUser(res.user);
-      setSuccess(res.message)
-      navigate("/meals")
+    } catch (err) {
+      setError(err.message || "Failed to sign up. Please check your connection.");
     }
 
 

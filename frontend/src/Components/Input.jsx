@@ -1,12 +1,13 @@
 import React from 'react'
 
-function Input({label,id,...props}) {
+function Input({label, id, ...props}) {
   return (
-    <>
+    <div className="control-group">
       <label htmlFor={id}>{label}</label>
-      <input id={id} name={name} {...props} />
-    </>
+      <input id={id} {...props} />
+    </div>
   )
 }
 
 export default Input
+

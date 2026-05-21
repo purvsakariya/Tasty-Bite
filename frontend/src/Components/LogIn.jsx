@@ -40,8 +40,8 @@ function Login() {
                 setSuccess(res.message)
                 navigate("/meals")
             }
-        } catch (error) {
-            throw new Error(error?.message || "Failed To Do Login!")
+        } catch (err) {
+            setError(err.message || "Failed to log in. Please check your connection.");
         }
 
 

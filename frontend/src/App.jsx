@@ -8,7 +8,6 @@ import { ProtectedRoute, PublicRoute } from './Components/ProtectedRoute.jsx'
 const AvailableMeals = lazy(() => import('./Components/AvailableMeals'))
 const Cart = lazy(() => import("./Components/Cart.jsx"));
 const Checkout = lazy(() => import("./Components/Checkout.jsx"));
-const Header = lazy(() => import("./Components/Header"));
 const OrderPlaced = lazy(() => import("./Components/OrderPlaced.jsx"));
 const LogIn = lazy(() => import("./Components/LogIn.jsx"));
 const SignIn = lazy(() => import("./Components/SignIn.jsx"));
@@ -74,7 +73,7 @@ const router = createBrowserRouter([
         </ProtectedRoute>)
       },
       {
-        path: "/orderplaced",
+        path: "/placeOrder",
         element: (<ProtectedRoute>
           <Suspense fallback={<p className="loading">Loading.....</p>}>
             <OrderPlaced />

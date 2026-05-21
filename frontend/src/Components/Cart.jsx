@@ -22,12 +22,12 @@ function Cart() {
           {items.map((meal) => {
             const totalPrice = Math.round(meal.quantity * meal.price).toFixed(2);
             return (
-              <li key={meal.id} className="cart-item">
+              <li key={meal._id} className="cart-item">
                 <p>
                   {meal.name} - {totalPrice}
                 </p>
                 <div className="cart-item-actions">
-                  <Button onClick={() => removeMeals(meal.id)}>-</Button>
+                  <Button onClick={() => removeMeals(meal._id)}>-</Button>
                   <p>{meal.quantity}</p>
                   <Button onClick={() => addMeals(meal)}>+</Button>
                 </div>

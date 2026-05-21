@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Input from "./Input";
 import {API} from '../config/api.js'
 import Button from "./Button";
@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 function Checkout() {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   let { items, user , clearCart } = useContext(Context);
   
@@ -17,6 +19,8 @@ function Checkout() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    setError(null);
+    setIsSubmitting(true);
 
     const fd = new FormData(e.target)
     const formData = Object.fromEntries(fd.entries());
@@ -40,17 +44,17 @@ function Checkout() {
       })
 
       const data = await res.json()
-      // console.log(data)
       if (!res.ok) {
         throw new Error(data?.message || 'Failed To Create Order')
       }
 
       clearCart();
-      navigate('/orderplaced')
+      navigate('/placeOrder')
 
-    } catch (error) {
-      // console.error('Order submission error:', error.message)
-      throw error
+    } catch (err) {
+      setError(err.message || 'Failed to submit order. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -94,11 +98,14 @@ function Checkout() {
               <Input label="City" id="city" name="city" type="text" placeholder="City" required />
             </div>
           </div>
+          {error && <p className="error" style={{ marginTop: "1rem" }}>{error}</p>}
           <p className="modal-actions">
-            <button className="text-button" onClick={() => navigate("/meals")}>
+            <button type="button" className="text-button" onClick={() => navigate("/meals")} disabled={isSubmitting}>
               Close
             </button>
-            <Button type="submit">Submit Order</Button>
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Submit Order"}
+            </Button>
           </p>
         </form>
       </div>

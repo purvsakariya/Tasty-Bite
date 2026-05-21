@@ -11,26 +11,40 @@ function OrderHistory() {
     const [isLoading, setIsLoading] = useState(true);
     const [orders, setOrders] = useState([])
 
+    const [error, setError] = useState(null);
+
     useEffect(() => {
-
-        try {
-            fetch(API.ORDER_HISTORY, {
-                method: "POST",
-                body: JSON.stringify({ email: user?.email }),
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setOrders(data.orders)
-                    setIsLoading(false)
-                })
-                .catch(err => { throw new Error(err?.message || "Failed to Fetched User Orders") })
-
-        } catch (error) {
-            throw new Error(error?.message || "Failed to Fetched User Orders");
+        if (!user?.email) {
+            setIsLoading(false);
+            return;
         }
+
+        setIsLoading(true);
+        setError(null);
+
+        fetch(API.ORDER_HISTORY, {
+            method: "POST",
+            body: JSON.stringify({ email: user.email }),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+            .then(res => {
+                if (!res.ok) {
+                    return res.json().then(err => {
+                        throw new Error(err?.message || "Failed to fetch orders");
+                    });
+                }
+                return res.json();
+            })
+            .then(data => {
+                setOrders(data.orders || []);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                setError(err.message || "Failed to fetch your order history.");
+                setIsLoading(false);
+            });
 
     }, [user])
 
@@ -43,11 +57,23 @@ function OrderHistory() {
         )
     }
 
+    if (error) {
+        return (
+            <div className='ordersHistoryError'>
+                <h2>Error Loading History</h2>
+                <p className="error" style={{ maxWidth: "25rem", margin: "1rem auto" }}>{error}</p>
+                <Button onClick={() => navigate('/meals')}>Home</Button>
+            </div>
+        )
+    }
+
     if (!orders || orders.length === 0) {
-        <div className='ordersHistoryError'>
-            <h2>Please Order Something...</h2>
-            <Button onClick={() => navigate('/meals')}>Home</Button>
-        </div>
+        return (
+            <div className='ordersHistoryError'>
+                <h2>Please Order Something...</h2>
+                <Button onClick={() => navigate('/meals')}>Home</Button>
+            </div>
+        )
     }
 
     return (
